@@ -1,1 +1,1 @@
-include ':app', ':library', ':wxlibrary'
+include ':app', ':library'

@@ -22,6 +22,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':wxlibrary')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    provided 'com.github.daohen:personalToolboxLibrary:+'
+
+    //不包含统计功能
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+
+    //包含统计功能
+//    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }
