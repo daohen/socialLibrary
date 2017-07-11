@@ -1,4 +1,4 @@
-package com.daohen.social.wx.library;
+package com.daohen.social.library.wx;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -1,4 +1,4 @@
-package com.daohen.social.wx.library;
+package com.daohen.social.library.wx;
 
 import android.graphics.Bitmap;
 
@@ -7,18 +7,17 @@ import com.daohen.personal.toolbox.library.util.Strings;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXVideoObject;
-import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
 /**
  * CREATE BY ALUN
  * EMAIL: alunfeixue2011@gmail.com
  * DATA : 2017/07/11 14:36
  */
-public class ShareWebpageObj {
+public class ShareVideoObj {
 
     private SendMessageToWX.Req req;
 
-    private ShareWebpageObj(SendMessageToWX.Req req){
+    private ShareVideoObj(SendMessageToWX.Req req){
         this.req = req;
     }
 
@@ -58,26 +57,25 @@ public class ShareWebpageObj {
             return this;
         }
 
-        protected ShareWebpageObj build(){
-            if (!Strings.isUrl(url) || Strings.isNull(title))
-                throw new NullPointerException("分享的url、title不能为空");
+        protected ShareVideoObj build(){
+            if (!Strings.isUrl(url) || Strings.isNull(title) || thumb == null)
+                throw new NullPointerException("分享的视频url、title和thumb不能为空");
 
-            WXWebpageObject webpageObject = new WXWebpageObject();
-            webpageObject.webpageUrl = url;
+            WXVideoObject videoObject = new WXVideoObject();
+            videoObject.videoUrl = url;
 
             WXMediaMessage mediaMessage = new WXMediaMessage();
-            mediaMessage.mediaObject = webpageObject;
+            mediaMessage.mediaObject = videoObject;
             mediaMessage.title = title;
             mediaMessage.description = desc;
-            if (thumb != null)
-                mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumb, true);
+            mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumb, true);
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = WxUtils.buildTransation("webpage");
+            req.transaction = WxUtils.buildTransation("video");
             req.message = mediaMessage;
             req.scene = isTimeline ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
 
-            return new ShareWebpageObj(req);
+            return new ShareVideoObj(req);
         }
     }
 

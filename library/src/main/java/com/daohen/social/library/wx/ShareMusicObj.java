@@ -1,4 +1,4 @@
-package com.daohen.social.wx.library;
+package com.daohen.social.library.wx;
 
 import android.graphics.Bitmap;
 
@@ -6,18 +6,18 @@ import com.daohen.personal.toolbox.library.util.Bitmaps;
 import com.daohen.personal.toolbox.library.util.Strings;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXVideoObject;
+import com.tencent.mm.opensdk.modelmsg.WXMusicObject;
 
 /**
  * CREATE BY ALUN
  * EMAIL: alunfeixue2011@gmail.com
- * DATA : 2017/07/11 14:36
+ * DATA : 2017/07/11 14:09
  */
-public class ShareVideoObj {
+public class ShareMusicObj {
 
     private SendMessageToWX.Req req;
 
-    private ShareVideoObj(SendMessageToWX.Req req){
+    private ShareMusicObj(SendMessageToWX.Req req){
         this.req = req;
     }
 
@@ -57,25 +57,25 @@ public class ShareVideoObj {
             return this;
         }
 
-        protected ShareVideoObj build(){
+        protected ShareMusicObj build(){
             if (!Strings.isUrl(url) || Strings.isNull(title) || thumb == null)
-                throw new NullPointerException("分享的视频url、title和thumb不能为空");
+                throw new NullPointerException("分享的音乐url、title和thumb不能为空");
 
-            WXVideoObject videoObject = new WXVideoObject();
-            videoObject.videoUrl = url;
+            WXMusicObject musicObject = new WXMusicObject();
+            musicObject.musicUrl = url;
 
             WXMediaMessage mediaMessage = new WXMediaMessage();
-            mediaMessage.mediaObject = videoObject;
+            mediaMessage.mediaObject = musicObject;
             mediaMessage.title = title;
             mediaMessage.description = desc;
             mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumb, true);
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = WxUtils.buildTransation("video");
+            req.transaction = WxUtils.buildTransation("music");
             req.message = mediaMessage;
             req.scene = isTimeline ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
 
-            return new ShareVideoObj(req);
+            return new ShareMusicObj(req);
         }
     }
 

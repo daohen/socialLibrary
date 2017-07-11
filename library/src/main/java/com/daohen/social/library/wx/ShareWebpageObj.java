@@ -1,4 +1,4 @@
-package com.daohen.social.wx.library;
+package com.daohen.social.library.wx;
 
 import android.graphics.Bitmap;
 
@@ -6,18 +6,19 @@ import com.daohen.personal.toolbox.library.util.Bitmaps;
 import com.daohen.personal.toolbox.library.util.Strings;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXMusicObject;
+import com.tencent.mm.opensdk.modelmsg.WXVideoObject;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
 /**
  * CREATE BY ALUN
  * EMAIL: alunfeixue2011@gmail.com
- * DATA : 2017/07/11 14:09
+ * DATA : 2017/07/11 14:36
  */
-public class ShareMusicObj {
+public class ShareWebpageObj {
 
     private SendMessageToWX.Req req;
 
-    private ShareMusicObj(SendMessageToWX.Req req){
+    private ShareWebpageObj(SendMessageToWX.Req req){
         this.req = req;
     }
 
@@ -57,25 +58,26 @@ public class ShareMusicObj {
             return this;
         }
 
-        protected ShareMusicObj build(){
-            if (!Strings.isUrl(url) || Strings.isNull(title) || thumb == null)
-                throw new NullPointerException("分享的音乐url、title和thumb不能为空");
+        protected ShareWebpageObj build(){
+            if (!Strings.isUrl(url) || Strings.isNull(title))
+                throw new NullPointerException("分享的url、title不能为空");
 
-            WXMusicObject musicObject = new WXMusicObject();
-            musicObject.musicUrl = url;
+            WXWebpageObject webpageObject = new WXWebpageObject();
+            webpageObject.webpageUrl = url;
 
             WXMediaMessage mediaMessage = new WXMediaMessage();
-            mediaMessage.mediaObject = musicObject;
+            mediaMessage.mediaObject = webpageObject;
             mediaMessage.title = title;
             mediaMessage.description = desc;
-            mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumb, true);
+            if (thumb != null)
+                mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumb, true);
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = WxUtils.buildTransation("music");
+            req.transaction = WxUtils.buildTransation("webpage");
             req.message = mediaMessage;
             req.scene = isTimeline ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
 
-            return new ShareMusicObj(req);
+            return new ShareWebpageObj(req);
         }
     }
 
