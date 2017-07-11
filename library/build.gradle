@@ -24,7 +24,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    provided 'com.github.daohen:personalToolboxLibrary:+'
+    provided 'com.github.daohen:personalToolboxLibrary:0.6'
 
     //不包含统计功能
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
