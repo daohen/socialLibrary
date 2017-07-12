@@ -1,4 +1,4 @@
-package com.daohen.social.library.wx;
+package com.daohen.social.library.wx.share;
 
 import android.graphics.Bitmap;
 
@@ -6,7 +6,6 @@ import com.daohen.personal.toolbox.library.util.Bitmaps;
 import com.daohen.personal.toolbox.library.util.Strings;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.opensdk.modelmsg.WXVideoObject;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
 /**
@@ -14,51 +13,45 @@ import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
  * EMAIL: alunfeixue2011@gmail.com
  * DATA : 2017/07/11 14:36
  */
-public class ShareWebpageObj {
+public class ShareWebpageObj extends ShareObj {
 
-    private SendMessageToWX.Req req;
-
-    private ShareWebpageObj(SendMessageToWX.Req req){
-        this.req = req;
+    private ShareWebpageObj(SendMessageToWX.Req req) {
+        super(req);
     }
 
-    protected SendMessageToWX.Req getReq(){
-        return req;
-    }
-
-    protected static class Builder{
+    public static class Builder{
         private String url;
         private String title;
         private String desc;
         private Bitmap thumb;
         private boolean isTimeline;
 
-        protected Builder url(String url){
+        public Builder url(String url){
             this.url = url;
             return this;
         }
 
-        protected Builder title(String title){
+        public Builder title(String title){
             this.title = title;
             return this;
         }
 
-        protected Builder desc(String desc){
+        public Builder desc(String desc){
             this.desc = desc;
             return this;
         }
 
-        protected Builder thumb(Bitmap thumb){
+        public Builder thumb(Bitmap thumb){
             this.thumb = thumb;
             return this;
         }
 
-        protected Builder isTimeline(boolean isTimeline){
+        public Builder isTimeline(boolean isTimeline){
             this.isTimeline = isTimeline;
             return this;
         }
 
-        protected ShareWebpageObj build(){
+        public ShareWebpageObj build(){
             if (!Strings.isUrl(url) || Strings.isNull(title))
                 throw new NullPointerException("分享的url、title不能为空");
 
@@ -73,7 +66,7 @@ public class ShareWebpageObj {
                 mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumb, true);
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = WxUtils.buildTransation("webpage");
+            req.transaction = buildTransation("webpage");
             req.message = mediaMessage;
             req.scene = isTimeline ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
 

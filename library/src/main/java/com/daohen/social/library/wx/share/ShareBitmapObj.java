@@ -1,4 +1,4 @@
-package com.daohen.social.library.wx;
+package com.daohen.social.library.wx.share;
 
 import android.graphics.Bitmap;
 
@@ -12,33 +12,27 @@ import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
  * EMAIL: alunfeixue2011@gmail.com
  * DATA : 2017/07/11 13:52
  */
-public class ShareBitmapObj {
+public class ShareBitmapObj extends ShareObj {
 
-    private SendMessageToWX.Req req;
-
-    private ShareBitmapObj(SendMessageToWX.Req req){
-        this.req = req;
+    private ShareBitmapObj(SendMessageToWX.Req req) {
+        super(req);
     }
 
-    protected SendMessageToWX.Req getReq(){
-        return req;
-    }
-
-    protected static class Builder{
+    public static class Builder{
         private Bitmap bitmap;
         private boolean isTimeline;
 
-        protected Builder bitmap(Bitmap bitmap){
+        public Builder bitmap(Bitmap bitmap){
             this.bitmap = bitmap;
             return this;
         }
 
-        protected Builder isTimeline(boolean isTimeline){
+        public Builder isTimeline(boolean isTimeline){
             this.isTimeline = isTimeline;
             return this;
         }
 
-        protected ShareBitmapObj build(){
+        public ShareBitmapObj build(){
             if (bitmap == null)
                 throw new NullPointerException("分享的图片不能为空");
 
@@ -49,7 +43,7 @@ public class ShareBitmapObj {
             mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumbBmp, true);
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = WxUtils.buildTransation("img");
+            req.transaction = buildTransation("img");
             req.message = mediaMessage;
             req.scene = isTimeline ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
 

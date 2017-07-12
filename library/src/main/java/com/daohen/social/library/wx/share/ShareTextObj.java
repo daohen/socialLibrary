@@ -1,4 +1,4 @@
-package com.daohen.social.library.wx;
+package com.daohen.social.library.wx.share;
 
 import com.daohen.personal.toolbox.library.util.Strings;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -10,40 +10,34 @@ import com.tencent.mm.opensdk.modelmsg.WXTextObject;
  * EMAIL: alunfeixue2011@gmail.com
  * DATA : 2017/07/11 11:28
  */
-public class ShareTextObj {
+public class ShareTextObj extends ShareObj {
 
-    private SendMessageToWX.Req req;
-
-    private ShareTextObj(SendMessageToWX.Req req){
-        this.req = req;
+    private ShareTextObj(SendMessageToWX.Req req) {
+        super(req);
     }
 
-    protected SendMessageToWX.Req getReq(){
-        return req;
-    }
-
-    protected static class Builder{
+    public static class Builder{
 
         private String content;
         private String desc;
         private boolean isTimeline;
 
-        protected Builder content(String content){
+        public Builder content(String content){
             this.content = content;
             return this;
         }
 
-        protected Builder desc(String desc){
+        public Builder desc(String desc){
             this.desc = desc;
             return this;
         }
 
-        protected Builder isTimeline(boolean isTimeline){
+        public Builder isTimeline(boolean isTimeline){
             this.isTimeline = isTimeline;
             return this;
         }
 
-        protected ShareTextObj build(){
+        public ShareTextObj build(){
             if (Strings.isNull(content))
                 throw new NullPointerException("分享的内容不能为空");
 
@@ -52,7 +46,7 @@ public class ShareTextObj {
             mediaMessage.description = desc;
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = WxUtils.buildTransation("text");
+            req.transaction = buildTransation("text");
             req.message = mediaMessage;
             req.scene = isTimeline ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
 

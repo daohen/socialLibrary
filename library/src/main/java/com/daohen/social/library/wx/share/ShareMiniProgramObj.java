@@ -1,4 +1,4 @@
-package com.daohen.social.library.wx;
+package com.daohen.social.library.wx.share;
 
 import android.graphics.Bitmap;
 
@@ -13,19 +13,13 @@ import com.tencent.mm.opensdk.modelmsg.WXMiniProgramObject;
  * EMAIL: alunfeixue2011@gmail.com
  * DATA : 2017/07/11 14:53
  */
-public class ShareMiniProgramObj {
+public class ShareMiniProgramObj extends ShareObj {
 
-    private SendMessageToWX.Req req;
-
-    private ShareMiniProgramObj(SendMessageToWX.Req req){
-        this.req = req;
+    private ShareMiniProgramObj(SendMessageToWX.Req req) {
+        super(req);
     }
 
-    protected SendMessageToWX.Req getReq(){
-        return req;
-    }
-
-    protected static class Builder{
+    public static class Builder{
         private String url;
         private String username;
         private String path;
@@ -33,37 +27,37 @@ public class ShareMiniProgramObj {
         private String desc;
         private Bitmap thumb;
 
-        protected Builder url(String url){
+        public Builder url(String url){
             this.url = url;
             return this;
         }
 
-        protected Builder username(String username){
+        public Builder username(String username){
             this.username = username;
             return this;
         }
 
-        protected Builder path(String path){
+        public Builder path(String path){
             this.path = path;
             return this;
         }
 
-        protected Builder title(String title){
+        public Builder title(String title){
             this.title = title;
             return this;
         }
 
-        protected Builder desc(String desc){
+        public Builder desc(String desc){
             this.desc = desc;
             return this;
         }
 
-        protected Builder thumb(Bitmap thumb){
+        public Builder thumb(Bitmap thumb){
             this.thumb = thumb;
             return this;
         }
 
-        protected ShareMiniProgramObj build(){
+        public ShareMiniProgramObj build(){
             if (!Strings.isUrl(url) || Strings.isNull(username) || Strings.isNull(path) || Strings.isNull(title))
                 throw new NullPointerException("分享小程序时的原始url、username、path、title不能为空");
 
@@ -80,7 +74,7 @@ public class ShareMiniProgramObj {
                 mediaMessage.thumbData = Bitmaps.bmpToByteArray(thumb, true);
 
             SendMessageToWX.Req req = new SendMessageToWX.Req();
-            req.transaction = WxUtils.buildTransation("miniprogram");
+            req.transaction = buildTransation("miniprogram");
             req.message = mediaMessage;
             req.scene = SendMessageToWX.Req.WXSceneSession;
 
