@@ -1,11 +1,13 @@
 package com.daohen.social.library.wx;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 
 import com.daohen.personal.toolbox.library.Singleton;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 /**
@@ -158,6 +160,12 @@ public class WxProvider {
                 .thumb(thumb)
                 .build();
         iwxapi.sendReq(miniProgramObj.getReq());
+    }
+
+    public void handleIntent(Intent intent, IWXAPIEventHandler iwxapiEventHandler){
+        checkNull();
+
+        iwxapi.handleIntent(intent, iwxapiEventHandler);
     }
 
 
