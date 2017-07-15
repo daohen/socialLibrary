@@ -24,12 +24,16 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    provided 'com.github.daohen:personalToolboxLibrary:0.6'
-    provided 'com.github.daohen:thirdPartyLibrary:0.3'
+    provided 'com.github.daohen:personalToolboxLibrary:master-SNAPSHOT'
+    provided 'com.github.daohen:thirdPartyLibrary:master-SNAPSHOT'
 
     //不包含统计功能
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
 
     //包含统计功能
 //    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }

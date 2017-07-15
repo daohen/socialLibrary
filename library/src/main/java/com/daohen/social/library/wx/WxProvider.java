@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 
 import com.daohen.personal.toolbox.library.Singleton;
+import com.daohen.social.library.wx.login.LoginListener;
+import com.daohen.social.library.wx.login.LoginObj;
 import com.daohen.social.library.wx.share.ShareBitmapObj;
 import com.daohen.social.library.wx.share.ShareMiniProgramObj;
 import com.daohen.social.library.wx.share.ShareMusicObj;
 import com.daohen.social.library.wx.share.ShareTextObj;
 import com.daohen.social.library.wx.share.ShareVideoObj;
 import com.daohen.social.library.wx.share.ShareWebpageObj;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -22,15 +25,28 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
  */
 public class WxProvider {
 
+    private String appid;
+    private String appSecret;
+
     private static IWXAPI iwxapi;
 
     public static final WxProvider get(){
         return gDefault.get();
     }
 
-    public void registerWx(Context context, String appid){
+    public void registerWx(Context context, String appid, String appSecret){
+        this.appid = appid;
+        this.appSecret = appSecret;
         iwxapi = WXAPIFactory.createWXAPI(context, appid, true);
         iwxapi.registerApp(appid);
+    }
+
+    public String getAppid(){
+        return appid;
+    }
+
+    public String getAppSecret(){
+        return appSecret;
     }
 
     public void shareText(String content, boolean isTimeline){
@@ -171,6 +187,16 @@ public class WxProvider {
         checkNull();
 
         iwxapi.handleIntent(intent, iwxapiEventHandler);
+    }
+
+    /**
+     * 微信登录
+     * @param listener
+     */
+    public void login(LoginListener listener){
+        checkNull();
+
+        iwxapi.sendReq(LoginObj.get().getSendAuthReq(listener));
     }
 
 
