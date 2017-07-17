@@ -25,6 +25,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     provided 'com.github.daohen:personalToolboxLibrary:master-SNAPSHOT'
+//    provided 'com.github.daohen:thirdPartyLibrary:master-SNAPSHOT'
 }
 
 configurations.all {
