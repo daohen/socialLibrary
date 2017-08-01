@@ -1,4 +1,4 @@
-package com.daohen.social.library.qq.bean;
+package com.daohen.social.qq.library.bean;
 
 /**
  * CREATE BY ALUN

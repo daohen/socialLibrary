@@ -1,6 +1,6 @@
-package com.daohen.social.library.qq.listener;
+package com.daohen.social.qq.library.listener;
 
-import com.daohen.social.library.qq.bean.UserInfoResponse;
+import com.daohen.social.qq.library.bean.UserInfoResponse;
 import com.tencent.tauth.UiError;
 
 /**

@@ -1,12 +1,11 @@
-package com.daohen.social.library.qq.listener;
+package com.daohen.social.qq.library.listener;
 
 import android.content.Context;
 
-import com.daohen.social.library.qq.QQProvider;
-import com.daohen.social.library.qq.bean.LoginResponse;
+import com.daohen.social.qq.library.QQProvider;
+import com.daohen.social.qq.library.bean.LoginResponse;
 import com.daohen.thirdparty.library.gson.GsonFactory;
 import com.google.gson.reflect.TypeToken;
-import com.tencent.connect.UserInfo;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.UiError;
 

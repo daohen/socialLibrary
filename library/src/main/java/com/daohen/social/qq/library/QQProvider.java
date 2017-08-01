@@ -1,22 +1,19 @@
-package com.daohen.social.library.qq;
+package com.daohen.social.qq.library;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.daohen.personal.toolbox.library.Singleton;
 import com.daohen.personal.toolbox.library.util.Contexts;
 import com.daohen.personal.toolbox.library.util.Toasts;
-import com.daohen.social.library.qq.listener.LoginIUiListener;
-import com.daohen.social.library.qq.listener.LoginListener;
-import com.daohen.social.library.qq.listener.UserInfoIUiListener;
+import com.daohen.social.qq.library.listener.LoginIUiListener;
+import com.daohen.social.qq.library.listener.LoginListener;
+import com.daohen.social.qq.library.listener.UserInfoIUiListener;
 import com.tencent.connect.UserInfo;
-import com.tencent.connect.common.Constants;
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 
 /**
  * CREATE BY ALUN
