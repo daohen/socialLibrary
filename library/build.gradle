@@ -23,4 +23,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    provided 'com.github.daohen:personalToolboxLibrary:master-SNAPSHOT'
 }
