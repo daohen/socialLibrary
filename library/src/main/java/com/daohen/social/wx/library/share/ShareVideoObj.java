@@ -1,4 +1,4 @@
-package com.daohen.social.library.wx.share;
+package com.daohen.social.wx.library.share;
 
 import android.graphics.Bitmap;
 

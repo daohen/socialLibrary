@@ -1,13 +1,12 @@
-package com.daohen.social.library.wx;
+package com.daohen.social.wx.library;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.util.Log;
 
 import com.daohen.personal.toolbox.library.util.Logs;
-import com.daohen.social.library.wx.login.LoginObj;
+import com.daohen.social.wx.library.login.LoginObj;
 import com.daohen.thirdparty.library.gson.GsonFactory;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelbase.BaseReq;

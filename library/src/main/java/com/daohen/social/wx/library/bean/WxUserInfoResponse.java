@@ -1,4 +1,4 @@
-package com.daohen.social.library.wx.bean;
+package com.daohen.social.wx.library.bean;
 
 /**
  * CREATE BY ALUN

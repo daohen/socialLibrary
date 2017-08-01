@@ -1,6 +1,6 @@
-package com.daohen.social.library.wx.login;
+package com.daohen.social.wx.library.login;
 
-import com.daohen.social.library.wx.bean.WxUserInfoResponse;
+import com.daohen.social.wx.library.bean.WxUserInfoResponse;
 
 /**
  * CREATE BY ALUN

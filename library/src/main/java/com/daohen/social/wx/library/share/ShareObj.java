@@ -1,4 +1,4 @@
-package com.daohen.social.library.wx.share;
+package com.daohen.social.wx.library.share;
 
 import com.daohen.personal.toolbox.library.util.Strings;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;

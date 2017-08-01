@@ -1,11 +1,10 @@
-package com.daohen.social.library.wx.login;
+package com.daohen.social.wx.library.login;
 
-import com.daohen.social.library.wx.bean.AccessTokenResponse;
-import com.daohen.social.library.wx.bean.CheckAccessTokenResponse;
-import com.daohen.social.library.wx.bean.WxUserInfoResponse;
+import com.daohen.social.wx.library.bean.AccessTokenResponse;
+import com.daohen.social.wx.library.bean.CheckAccessTokenResponse;
+import com.daohen.social.wx.library.bean.WxUserInfoResponse;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

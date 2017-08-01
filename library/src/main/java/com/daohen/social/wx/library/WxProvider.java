@@ -1,19 +1,18 @@
-package com.daohen.social.library.wx;
+package com.daohen.social.wx.library;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
 import com.daohen.personal.toolbox.library.Singleton;
-import com.daohen.social.library.wx.login.LoginListener;
-import com.daohen.social.library.wx.login.LoginObj;
-import com.daohen.social.library.wx.share.ShareBitmapObj;
-import com.daohen.social.library.wx.share.ShareMiniProgramObj;
-import com.daohen.social.library.wx.share.ShareMusicObj;
-import com.daohen.social.library.wx.share.ShareTextObj;
-import com.daohen.social.library.wx.share.ShareVideoObj;
-import com.daohen.social.library.wx.share.ShareWebpageObj;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.daohen.social.wx.library.login.LoginListener;
+import com.daohen.social.wx.library.login.LoginObj;
+import com.daohen.social.wx.library.share.ShareBitmapObj;
+import com.daohen.social.wx.library.share.ShareMiniProgramObj;
+import com.daohen.social.wx.library.share.ShareMusicObj;
+import com.daohen.social.wx.library.share.ShareTextObj;
+import com.daohen.social.wx.library.share.ShareVideoObj;
+import com.daohen.social.wx.library.share.ShareWebpageObj;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;

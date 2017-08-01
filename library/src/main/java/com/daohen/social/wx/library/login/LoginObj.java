@@ -1,9 +1,9 @@
-package com.daohen.social.library.wx.login;
+package com.daohen.social.wx.library.login;
 
 import com.daohen.personal.toolbox.library.Singleton;
-import com.daohen.social.library.wx.WxProvider;
-import com.daohen.social.library.wx.bean.AccessTokenResponse;
-import com.daohen.social.library.wx.bean.WxUserInfoResponse;
+import com.daohen.social.wx.library.WxProvider;
+import com.daohen.social.wx.library.bean.AccessTokenResponse;
+import com.daohen.social.wx.library.bean.WxUserInfoResponse;
 import com.daohen.thirdparty.library.retrofit.RetrofitFactory;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
