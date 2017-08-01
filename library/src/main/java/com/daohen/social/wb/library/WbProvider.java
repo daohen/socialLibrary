@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.daohen.personal.toolbox.library.Singleton;
+import com.daohen.social.wb.library.api.WbApi;
+import com.daohen.social.wb.library.bean.SuccessObj;
+import com.daohen.social.wb.library.callback.LoginAuthListener;
 import com.sina.weibo.sdk.WbSdk;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WebpageObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WbAuthListener;
+import com.sina.weibo.sdk.auth.WbConnectErrorMessage;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.share.WbShareCallback;
 import com.sina.weibo.sdk.share.WbShareHandler;
@@ -39,30 +44,58 @@ public class WbProvider {
      * SSO 授权, 仅客户端
      * @param listener
      */
-    public void authorizeClientSso(WbAuthListener listener){
+    public void authorizeClientSso(LoginAuthListener listener){
         checkSSoHandler();
 
-        ssoHandler.authorizeClientSso(listener);
+        ssoHandler.authorizeClientSso(new WbAuthWrap(listener));
     }
 
     /**
      * SSO 授权, 仅Web
      * @param listener
      */
-    public void authorizeWeb(WbAuthListener listener){
+    public void authorizeWeb(LoginAuthListener listener){
         checkSSoHandler();
 
-        ssoHandler.authorizeWeb(listener);
+        ssoHandler.authorizeWeb(new WbAuthWrap(listener));
     }
 
     /**
      * SSO 授权, ALL IN ONE   如果手机安装了微博客户端则使用客户端授权,没有则进行网页授权
      * @param listener
      */
-    public void authorize(WbAuthListener listener){
+    public void authorize(LoginAuthListener listener){
         checkSSoHandler();
 
-        ssoHandler.authorize(listener);
+        ssoHandler.authorize(new WbAuthWrap(listener));
+    }
+
+    private class WbAuthWrap implements WbAuthListener{
+
+        private LoginAuthListener listener;
+
+        public WbAuthWrap(LoginAuthListener listener){
+            this.listener = listener;
+        }
+
+        @Override
+        public void onSuccess(Oauth2AccessToken oauth2AccessToken) {
+            if (listener.isObtainUserInfo()){
+                WbApi.get().getUserInfo(oauth2AccessToken, listener);
+            } else {
+                listener.onSuccess(new SuccessObj(oauth2AccessToken));
+            }
+        }
+
+        @Override
+        public void cancel() {
+            listener.cancel();
+        }
+
+        @Override
+        public void onFailure(WbConnectErrorMessage wbConnectErrorMessage) {
+            listener.onFailure();
+        }
     }
 
     /**

@@ -25,6 +25,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     provided 'com.github.daohen:personalToolboxLibrary:master-SNAPSHOT'
+    provided 'com.github.daohen:thirdPartyLibrary:master-SNAPSHOT'
+
     compile 'com.sina.weibo.sdk:core:2.0.6:openDefaultRelease@aar'
 }
 
