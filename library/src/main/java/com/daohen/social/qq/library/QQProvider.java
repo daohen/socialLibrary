@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.daohen.personal.toolbox.library.Singleton;
-import com.daohen.personal.toolbox.library.util.Contexts;
 import com.daohen.personal.toolbox.library.util.Toasts;
 import com.daohen.social.qq.library.listener.LoginIUiListener;
 import com.daohen.social.qq.library.listener.LoginListener;
@@ -53,10 +52,10 @@ public class QQProvider {
         tencent.login(activity, "all", new LoginIUiListener(activity.getApplicationContext(), listener));
     }
 
-    public void logout(){
+    public void logout(Context context){
         checkNull();
 
-        tencent.logout(Contexts.getContext());
+        tencent.logout(context);
     }
 
     public void getUserInfo(LoginListener listener){
